@@ -31,7 +31,7 @@ The model was trained on about 1M events, roughly 0.15% of the training data, be
 - **Model:** an EdgeConv graph neural network in PyTorch. Pulses are nodes linked to their
   k = 8 nearest neighbours in (x, y, z, time). It has 3 message-passing layers, mean and max pooling, and
   a head that outputs a unit direction vector. It has 232,707 parameters.
-- **Training:** loss `1 - cos(angle)`, AdamW, OneCycle learning rate schedule, batch size 256, streamed over
+- **Training:** loss `1 - cos(angle)`, AdamW (Stochastic Optimization method), OneCycle learning rate schedule, batch size 256, streamed over
   batches 2 to 6 (2 epochs each). Validation used 10,000 events from batch 1.
 
 # How to run
