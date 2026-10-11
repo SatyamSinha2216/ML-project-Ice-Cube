@@ -9,10 +9,10 @@ The task is to predict each neutrino's direction (azimuth and zenith) from its v
 The metric is the mean angular error in radians (lower is better). A constant guess scores about 1.57 rad (90°).
 
 # Result
-| | Score 
+| Metric| Score 
 |---|---|
- Public leaderboard - 1.1357 
- Private leaderboard - 1.1359 (about 65°) 
+ Public leaderboard | 1.1357 
+ Private leaderboard | 1.1359 (about 65°) 
 
 Submitted after the competition deadline (late submission). Rank: [add from your leaderboard screenshot].
 The model was trained on about 1M events, roughly 0.15% of the training data, because of compute limits.
