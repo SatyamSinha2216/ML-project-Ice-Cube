@@ -6,7 +6,7 @@
 # Overview
 The IceCube detector records light pulses from neutrino interactions in Antarctic ice using 5,160 sensors.
 The task is to predict each neutrino's direction (azimuth and zenith) from its variable-length set of pulses.
-The metric is the mean angular error in radians (lower is better). A constant guess scores about 1.57 rad (90°).
+The metric is the mean angular error in radians (lower is better). A constant guess scores about 1.57 rad (90°) which is about average and we need to beat this.
 
 # Result
 | Metric| Score 
@@ -14,7 +14,7 @@ The metric is the mean angular error in radians (lower is better). A constant gu
  Public leaderboard | 1.1357 
  Private leaderboard | 1.1359 (about 65°) 
 
-Submitted after the competition deadline (late submission). Rank: [add from your leaderboard screenshot].
+Submitted after the competition deadline (late submission). Rank: [roughly around 588 due to late submission of Kaggle competition].
 The model was trained on about 1M events, roughly 0.15% of the training data, because of compute limits.
 
 # Repository contents
@@ -28,7 +28,7 @@ The model was trained on about 1M events, roughly 0.15% of the training data, be
 # Approach
 - **Preprocessing:** each event is capped at 128 pulses (non-auxiliary first, then earliest). Features are
   x, y, z, time (relative to the event's first pulse), log charge and the auxiliary flag, plus a padding mask.
-- **Model:** an EdgeConv (DGCNN-style) graph neural network in PyTorch. Pulses are nodes linked to their
+- **Model:** an EdgeConv graph neural network in PyTorch. Pulses are nodes linked to their
   k = 8 nearest neighbours in (x, y, z, time). It has 3 message-passing layers, mean and max pooling, and
   a head that outputs a unit direction vector. It has 232,707 parameters.
 - **Training:** loss `1 - cos(angle)`, AdamW, OneCycle learning rate schedule, batch size 256, streamed over
@@ -47,3 +47,6 @@ Edit the `DATA` and `WEIGHTS` paths at the top of each notebook.
 ## Possible improvements
 Train on many more batches, rebuild the graph from learned features (dynamic graph), add event-centred
 position features, use a larger model, and try a von Mises-Fisher loss.
+
+## Note
+The required task may take really long to compute even for 5-6 batches. So any other more batches would require extensive time for processing and checking it.
